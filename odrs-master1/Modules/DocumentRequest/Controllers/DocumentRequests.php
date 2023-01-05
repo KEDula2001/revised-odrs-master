@@ -24,10 +24,9 @@ class DocumentRequests extends BaseController
     // echo "<pre>";
     // print_r($this->data['office_approvals']);
     // die();
-	  $this->data['view'] = 'Modules\DocumentRequest\Views\requests\completed';
-	  return view('template/index', $this->data);
+    $this->data['view'] = 'Modules\DocumentRequest\Views\requests\completed';
+    return view('template/index', $this->data);
   }
-
   public function index()
   {
     $this->data['requests'] = $this->requestModel->getDetails(['requests.status' => 'p']);
@@ -79,7 +78,7 @@ class DocumentRequests extends BaseController
     $this->email->setTo($student[0]['email']);
     $this->email->setSubject('Document Request Update');
     $this->email->setFrom('noreply@rodras.puptaguigcs.net', 'PUP-Taguig ODRS');
-    $this->email->setMessage('<p>Good day!</p> <p>Your requested document/s has been approved and now will be process!</p> <p>Please be reminded that you\'ll be notified via email once your requested document is done and is ready for its next step process.
+    $this->email->setMessage('<p>Good day!</p> <p>Your requested document/s has been approved and processed!</p> <p>Please be reminded that you\'ll be notified via email once your requested document is done and is ready for its next step process.
 </p> <p>Thank you!</p>');
     if($this->requestModel->acceptPaid($_POST['id']))
       $this->email->send();
@@ -134,7 +133,7 @@ class DocumentRequests extends BaseController
     $this->email->setTo($student[0]['email']);
     $this->email->setSubject('Document Request Update');
     $this->email->setFrom('noreply@rodras.puptaguigcs.net', 'PUP-Taguig ODRS');
-    $this->email->setMessage('<p>Good day!</p> <p>Your requested document/s has been denied due to the following reasons!</p> <p>'. $_POST['remark'].'<p>Please check your ODRS Account for further information</p></p> <p>Thank you!</p> ');
+    $this->email->setMessage('<p>Good day!</p> <p>Your requested document/s has been denied due to the following reasons!</p> <p>'. $_POST['remark'].'<p>Please check your ODRS Account for further information.</p></p> <p>Thank you!</p> ');
     if($this->officeApprovalModel->holdRequest($_POST))
       $this->email->send();
     return $this->approval();
@@ -158,9 +157,7 @@ class DocumentRequests extends BaseController
         }
       }
     }
-
       return $this->approval();
-
   }
 
   public function onProcess()
@@ -232,7 +229,7 @@ class DocumentRequests extends BaseController
     $mail->setTo($_POST['email']);
     $mail->setSubject('Document Request Update');
     $mail->setFrom('noreply@rodras.puptaguigcs.net', 'PUP-Taguig ODRS');
-    $mail->setMessage('<p>Good day! </p><p>Your requested document is now ready to claim</p>' . $request['document'] . '<p>Just present the receipt to claim the document</p><p>Thank you!</p>');
+    $mail->setMessage('<p>Good day! </p><p>Your requested document is now ready to be claimed</p>' . $request['document'] . '<p>Just present the receipt to claim the document.</p><p>Thank you!</p>');
     $mail->send();
     return $data['page'].'';
   }
@@ -245,7 +242,7 @@ class DocumentRequests extends BaseController
     $this->email->setTo($student[0]['email']);
     $this->email->setSubject('Document Request Update');
     $this->email->setFrom('noreply@rodras.puptaguigcs.net', 'PUP-Taguig ODRS');
-    $this->email->setMessage('Your Form 137 Requests has been approved, you may now download the request form.');
+    $this->email->setMessage('Your Form 137 Request has been approved, you may now download the request form.');
     if($this->formRequestModel->acceptForm($_POST['id']))
       $this->email->send();
     return $this->formRequests();
@@ -469,60 +466,92 @@ class DocumentRequests extends BaseController
     return view('Modules\DocumentRequest\Views\requests\tables\claimed', $this->data);
   }
 
+
+  // -----> 10/11/22 
+  // ---->ADMISSION
+  public function bsitcourse(){
+    //$this->data['request_documents'] = $this->requestDetailModel->getDetails();
+    //$this->data['requests'] = $this->requestModel->getDetails(['requests.completed_at !=' => null, 'requests.status !=' => 'd']);
+    //$this->data['office_approvals'] = $this->officeApprovalModel->getDetails(['requests.completed_at !=' => null, 'request_details.status !=' => 'd']);
+    // echo "<pre>";
+    // print_r($this->data['office_approvals']);
+    // die();
+    $this->data['students'] = $this->studentModel->getDetail();
+    $this->data['students_inc'] = $this->studentModel->get(['course_id' => null]);
+    $this->data['courses'] = $this->courseModel->get();
+    $this->data['academic_status'] = $this->academicStatusModel->get();
+    $this->data['submission_status'] = $this->submissionstatusModel->get();
+    
+    $this->data['view'] = 'Modules\DocumentRequest\Views\requests\bsitcourse';
+    return view('template/index', $this->data);
+  }
+
+  public function bsececourse(){
+    //$this->data['request_documents'] = $this->requestDetailModel->getDetails();
+    //$this->data['requests'] = $this->requestModel->getDetails(['requests.completed_at !=' => null, 'requests.status !=' => 'd']);
+    //$this->data['office_approvals'] = $this->officeApprovalModel->getDetails(['requests.completed_at !=' => null, 'request_details.status !=' => 'd']);
+    // echo "<pre>";
+    // print_r($this->data['office_approvals']);
+    // die();
+    $this->data['view'] = 'Modules\DocumentRequest\Views\requests\bsececourse';
+    return view('template/index', $this->data);
+  }
+// ----------
+
   public function report(){
     $pdf = new Pdf('L', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
-		// set document information
-		$pdf->SetCreator(PDF_CREATOR);
-		$pdf->SetAuthor('PUPT Taguig ODRS');
-		$pdf->SetTitle('Report');
-		$pdf->SetSubject('Documet Request Report');
-		$pdf->SetKeywords('Report, ODRS, Document');
+    // set document information
+    $pdf->SetCreator(PDF_CREATOR);
+    $pdf->SetAuthor('PUPT Taguig ODRS');
+    $pdf->SetTitle('Report');
+    $pdf->SetSubject('Documet Request Report');
+    $pdf->SetKeywords('Report, ODRS, Document');
 
-		// set default header data
-		$pdf->SetHeaderData('header.png', '130', '', '');
+    // set default header data
+    $pdf->SetHeaderData('header.png', '130', '', '');
 
-		// set header and footer fonts
-		$pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-		$pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+    // set header and footer fonts
+    $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
+    $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 
-		// set default monospaced font
-		$pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+    // set default monospaced font
+    $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
-		// set margins
-		$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
-		$pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
-		$pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
+    // set margins
+    $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+    $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
+    $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 
-		// set auto page breaks
-		$pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+    // set auto page breaks
+    $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
 
-		// set image scale factor
-		$pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+    // set image scale factor
+    $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
 
-		// set some language-dependent strings (optional)
-		if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
-		    require_once(dirname(__FILE__).'/lang/eng.php');
-		    $pdf->setLanguageArray($l);
-		}
+    // set some language-dependent strings (optional)
+    if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
+        require_once(dirname(__FILE__).'/lang/eng.php');
+        $pdf->setLanguageArray($l);
+    }
 
-		// ---------------------------------------------------------
+    // ---------------------------------------------------------
 
-		// set font
+    // set font
 
-		// add a page
-		$pdf->AddPage();
+    // add a page
+    $pdf->AddPage();
 
 
-		$pdf->SetFont('helvetica', '', 10);
+    $pdf->SetFont('helvetica', '', 10);
 
-		// -----------------------------------------------------------------------------
-		$data['documents'] = $this->requestDetailModel->getReports($_GET['t'], $_GET['a'], $_GET['d']);
+    // -----------------------------------------------------------------------------
+    $data['documents'] = $this->requestDetailModel->getReports($_GET['t'], $_GET['a'], $_GET['d']);
     $data['types'] = $_GET;
     $data['document'] = $this->documentModel->get(['id' => $_GET['d']])[0]['document'];
-		$reportTable = view('Modules\DocumentRequest\Views\requests\report',$data);
+    $reportTable = view('Modules\DocumentRequest\Views\requests\report',$data);
 
-		$pdf->writeHTML($reportTable, true, false, false, false, '');
+    $pdf->writeHTML($reportTable, true, false, false, false, '');
 
     $pdf->SetFont('helvetica', '', 12);
 
@@ -552,7 +581,7 @@ Branch Director', 0, 'C', 0, 1, '', '', true, 0, false, true, 40, 'M');
     $summaryTable = view('Modules\DocumentRequest\Views\requests\summary',$data);
 
     $pdf->writeHTML($summaryTable, true, false, false, false, '');
-		// -----------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------
 
     $pdf->SetFont('helvetica', '', 12);
 
@@ -568,13 +597,13 @@ Branch Registrar Head', 0, 'C', 0, 0, '', '', true, 0, false, true, 40, 'M' ,tru
 Dr. Marissa B. Ferrer
 Branch Director', 0, 'C', 0, 1, '', '', true, 0, false, true, 40, 'M');
 
-		//Close and output PDF document
-		$pdf->Output('report.pdf', 'I');
+    //Close and output PDF document
+    $pdf->Output('report.pdf', 'I');
 
-		//============================================================+
-		// END OF FILE
-		//============================================================+
-		die();
+    //============================================================+
+    // END OF FILE
+    //============================================================+
+    die();
   }
 
   public function addForm(){
@@ -617,7 +646,7 @@ Branch Director', 0, 'C', 0, 1, '', '', true, 0, false, true, 40, 'M');
     // set document information
     $pdf->SetCreator(PDF_CREATOR);
     $pdf->SetAuthor('Nicola Asuni');
-    $pdf->SetTitle('TCPDF Example 048');
+    $pdf->SetTitle('Certification of Good Moral');
     $pdf->SetSubject('TCPDF Tutorial');
     $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
 
@@ -656,7 +685,7 @@ Branch Director', 0, 'C', 0, 1, '', '', true, 0, false, true, 40, 'M');
     $pdf->AddPage();
 
 
-    $pdf->SetFont('helvetica', '', 10);
+    $pdf->SetFont('lucidafax', '', 12);
 
     // -----------------------------------------------------------------------------
     $txt = <<<EOD
@@ -665,16 +694,55 @@ Branch Director', 0, 'C', 0, 1, '', '', true, 0, false, true, 40, 'M');
     // print a block of text using Write()
     $pdf->Write(0, $txt, '', 0, 'L', true, 0, false, false, 0);
     $date = date('F d, Y');
+     $txt = <<<EOD
+   
+    EOD;
+    // print a block of text using Write()
+    $pdf->Write(0, $txt, '', 0, 'L', true, 0, false, false, 0);
+     $txt = <<<EOD
+   
+    EOD;
+
+     // print a block of text using Write()
+    $pdf->Write(0, $txt, '', 0, 'L', true, 0, false, false, 0);
+     $txt = <<<EOD
+   
+    EOD;
+    // print a block of text using Write()
+    $pdf->Write(0, $txt, '', 0, 'L', true, 0, false, false, 0);
     $txt = <<<EOD
                   $date
     EOD;
     // print a block of text using Write()
     $pdf->Write(0, $txt, '', 0, 'R', true, 0, false, false, 0);
+     $txt = <<<EOD
+   
+    EOD;
+    // print a block of text using Write()
+    $pdf->Write(0, $txt, '', 0, 'L', true, 0, false, false, 0);
+     $txt = <<<EOD
+   
+    EOD;
+    
+    // print a block of text using Write()
+    //$pdf->Write(0, $txt, '', 0, 'L', true, 0, false, false, 0);
+    $pdf->SetFont('lucidafax', 'b', 20);
     $txt = <<<EOD
-    CERTIFICATION
+    C E RT I F I C A T I O N
     EOD;
     // print a block of text using Write()
     $pdf->Write(0, $txt, '', 0, 'C', true, 0, false, false, 0);
+    $txt = <<<EOD
+   
+    EOD;
+    // print a block of text using Write()
+    $pdf->Write(0, $txt, '', 0, 'L', true, 0, false, false, 0);
+     $txt = <<<EOD
+   
+    EOD;
+    // print a block of text using Write()
+    $pdf->Write(0, $txt, '', 0, 'L', true, 0, false, false, 0);
+     $pdf->SetFont('lucidafax', '', 12);
     $txt = <<<EOD
     To Whom It May Concern:
     EOD;
@@ -685,28 +753,48 @@ Branch Director', 0, 'C', 0, 1, '', '', true, 0, false, true, 40, 'M');
     $pronoun['subjective'] = $details['gender'] == 'm' ? 'he': 'she';
     $pronoun['possesive'] = $details['gender'] == 'm' ? 'his': 'hers';
     $pronoun['objective'] = $details['gender'] == 'm' ? 'him': 'her';
-    $html = '<span style="text-align:justify; text-indent: 50px;"><p> This is to certify that <b>'. $name .'</b> is a student of this University and that '.$pronoun['subjective'].' shows good moral character and has not been disciplined for any violation of the rules and regulations of the University.</p></span>';
+    $html = '
+    <style>
+    .firstspan{
+      text-align: justify; 
+      text-indent: 50px; 
+      font-family: lucidafax; 
+    }
+    .highlightnamespan{ 
+      font-family: lucidafaxdemib;
+      font-weight: bold;
+    }
+
+    </style>
+    <span class = "firstspan"><p> This is to certify that <span class = "highlightnamespan">'. $name .'</span> is a student of this University and that '.$pronoun['subjective'].' shows good moral character and has not been disciplined for any violation of the rules and regulations of the University. <br/><br/> This certification is being issued upon '.$pronoun['possesive'].' request for whatever legitimate purpose it may serve '.$pronoun['objective'].'.</p></span>';
 
 // output the HTML content
     $pdf->writeHTML($html, true, 0, true, false, '');
 
-    $html = '<span style="text-align:justify; text-indent: 50px;"><p>This certification is being issued upon '.$pronoun['possesive'].' request for whatever legitimate purpose it may serve '.$pronoun['objective'].'.</p></span>';
+   $html = '<span style="text-align:justify; text-indent: 50px; font-size:12;"><p>This certification is being issued upon '.$pronoun['possesive'].' request for whatever legitimate purpose it may serve '.$pronoun['objective'].'.</p></span>';
 
-    $pdf->writeHTML($html, true, 0, true, false, '');
+   //$pdf->writeHTML($html, true, 0, true, false, '');
 
     $tbl = <<<EOD
+     <style>
+    .headHL{
+      font-family: lucidafaxdemib;
+      
+    }
+    </style>
     <table border="0" cellpadding="2" cellspacing="2" align="center">
      <tr nobr="true">
       <td></td>
-      <td>MHEL P. GARCIA <br />Head of Admission & Registration Office</td>
+      <td class = "headHL" >MHEL P. GARCIA <br />Head of Admission & Registration Office</td>
      </tr>
     </table>
     EOD;
 
+
     $pdf->writeHTML($tbl, true, false, false, false, '');
 
     $txt = <<<EOD
-    shgs/20
+   
     EOD;
     // print a block of text using Write()
     $pdf->Write(0, $txt, '', 0, 'L', true, 0, false, false, 0);

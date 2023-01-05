@@ -45,7 +45,7 @@ class Home extends BaseController
 									'student_number' => $students[0]['student_number'],
 									'name' => $students[0]['firstname'] . ' ' . $students[0]['lastname'],
 								]);
-							} else {
+							}else {
 								$admins = $this->adminModel->getAdminByUserId($user['id']);
 								$this->session->set([
 									'user_id' => $user['id'],

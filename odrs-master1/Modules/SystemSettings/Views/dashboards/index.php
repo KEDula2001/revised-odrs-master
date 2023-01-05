@@ -4,7 +4,7 @@
               <!--<a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">   -->
       <form  action="Admin/generalreport" method="get">
       <div class="col-12">
-          <button type="submit" class="float-end btn btn-secondary" style = "background-color:blue"> Generate Report</button>
+          <button style= "background-color:#1b71fa" type="submit" class="float-end btn btn-secondary" formtarget="_blank"> Generate Report</button>
               <!--        <i class="fas fa-download fa-sm"></i> Generate Report</a>       -->
     </div>
   </div>

@@ -15,6 +15,4 @@ class Course extends BaseController
 		echo view('admin/course/index');
 		return view('admin/template/footer');
 	}
-
-
 }

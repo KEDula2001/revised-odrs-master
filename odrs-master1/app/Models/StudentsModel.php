@@ -47,5 +47,11 @@ class StudentsModel extends BaseModel
     $this->where('user_id', $id);
     return $this->findAll();
   }
-
+  public function __getStudentDetails()
+  { 
+    return $this->db->table($this->table)
+                        ->join('courses', 'courses.id = students.course_id')  
+                        ->get()
+                        ->getResultArray();
+  }
 }

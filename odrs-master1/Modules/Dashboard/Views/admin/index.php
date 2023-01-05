@@ -1,11 +1,14 @@
 <section class="dashboard">
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-      <h1 class="h3 mb-0">Dashboard</h1>
-      <button class="float-end btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                Generate Report
-    </button>
+  <h1 class="h3 mb-0">Dashboard</h1>
+              <!--<a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">   -->
+      <form  action="dashboards/dashreport" method="get">
+      <div class="col-12">
+          <button type="submit" class="float-end btn btn-secondary" formtarget="_blank"> Generate Report</button>
+              <!--        <i class="fas fa-download fa-sm"></i> Generate Report</a>       -->
+    </div>
+  </div>
 </div>
-
     <div class="row">
         <!-- Pending Requests Card Example -->
         <div class="col-xl-3 col-md-6 mb-4">
@@ -15,7 +18,7 @@
                       <div class="col mr-2">
                           <div class="fw-bold text-danger text-uppercase mb-1">
                               Pending Requests</div>
-                          <div class="h5 mb-0 fw-bold"><?=esc($requests_count)?></div>
+                          <div class="h5 mb-0 fw-bold"><?=esc($request_count)?></div>
                       </div>
                       <div class="col-auto">
                           <i class="fas fa-file-alt fa-2x"></i>

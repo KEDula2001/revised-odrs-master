@@ -8,6 +8,7 @@ $routes->group('requests', ['namespace' => 'Modules\DocumentRequest\Controllers'
     $routes->get('history', 'Requests::history');
     $routes->post('upload-receipt', 'Requests::uploadReceipt');
     $routes->match(['get', 'post'], 'new', 'Requests::add');
+    
 });
 
 $routes->group('document-requests', ['namespace' => 'Modules\DocumentRequest\Controllers'], function($routes)
@@ -80,3 +81,22 @@ $routes->group('completed', ['namespace' => 'Modules\DocumentRequest\Controllers
     $routes->get('/', 'DocumentRequests::completed');
 
 });
+//----November 2022
+//----BSIT COURSE
+$routes->group('bsit-course', ['namespace' => 'Modules\DocumentRequest\Controllers'], function($routes)
+{
+    $routes->get('/', 'DocumentRequests::bsitcourse');
+    
+});
+$routes->group('bsece-course', ['namespace' => 'Modules\DocumentRequest\Controllers'], function($routes)
+{
+    $routes->get('/', 'DocumentRequests::bsececourse');
+    
+});
+$routes->group('bsme-course', ['namespace' => 'Modules\DocumentRequest\Controllers'], function($routes)
+{
+    $routes->get('/', 'DocumentRequests::bsmecourse');
+    
+});
+
+

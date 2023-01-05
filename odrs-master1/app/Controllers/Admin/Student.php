@@ -37,5 +37,5 @@ class Student extends BaseController
 		return view('admin/template/footer');
 	}
 
-
+	
 }

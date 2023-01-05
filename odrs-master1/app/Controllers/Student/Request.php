@@ -14,10 +14,10 @@ class Request extends BaseController
 			return view('errors/html/error_404');
 
 		$data['documents'] = $this->document->get();
-    $data['request_details_ready'] = $this->requestDetail->getDetails(['requests.student_id' => $_SESSION['student_id'], 'request_details.status' => 'r', 'requests.status' => 'c']);
-    $data['request_details_process'] = $this->requestDetail->getDetails(['requests.student_id' => $_SESSION['student_id'], 'request_details.status' => 'p', 'requests.status' => 'c']);
-    $data['requests'] = $this->requestModel->getDetails(['student_id' => $_SESSION['student_id'], 'requests.completed_at' => null]);
-    $data['request_documents'] = $this->requestDetail->getDetails();
+	    $data['request_details_ready'] = $this->requestDetail->getDetails(['requests.student_id' => $_SESSION['student_id'], 'request_details.status' => 'r', 'requests.status' => 'c']);
+	    $data['request_details_process'] = $this->requestDetail->getDetails(['requests.student_id' => $_SESSION['student_id'], 'request_details.status' => 'p', 'requests.status' => 'c']);
+	    $data['requests'] = $this->requestModel->getDetails(['student_id' => $_SESSION['student_id'], 'requests.completed_at' => null]);
+	    $data['request_documents'] = $this->requestDetail->getDetails();
 
 		echo view('student/template/header');
 		echo view('student/request/index', $data);
@@ -178,6 +178,4 @@ class Request extends BaseController
 		echo view('student/request/history', $data);
 		return view('student/template/footer');
 	}
-
-
 }

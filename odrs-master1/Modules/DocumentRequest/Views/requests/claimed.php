@@ -3,10 +3,11 @@
         <div class="card-body">
           <div class="row">
             <div class="col-12 mb-3">
-              <span class="h2">Claimed Request</span>
+              <span class="h2">Claimed Requests</span>
               <button class="float-end btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                 Generate Report
               </button>
+              <br><p><i>Here are the list of requestors who have successfully claimed their requested documents.</i></p>
             </div>
           </div>
           <div class="row mb-3">
@@ -40,7 +41,7 @@
                     </div>
                     <div class="row">
                       <div class="col-12">
-                        <button type="submit" class="float-end btn btn-secondary" formtarget="_blank"> Generate </button>
+                        <button type="submit" style="background-color:green"class="float-end btn btn-secondary" formtarget="_blank"> Generate </button>
                       </div>
                     </div>
                   </form>

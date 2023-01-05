@@ -39,27 +39,27 @@
         </li>
         <li class="nav-item">
             <a class="nav-link sideLink" href="/payment">
-            <i class="fas fa-money-bill-wave" style="color: blue"></i> For Payment
+            <i class="fas fa-money-bill-wave" style="color: blue"></i> Payment Processing
             </a>
         </li>
-        <li class="nav-item">
+       <li class="nav-item">
             <a class="nav-link sideLink" href="/paid">
-            <i class="fas fa-receipt" style="color: green;"></i> Paid Requests
+            <i class="fas fa-receipt" style="color: green;"></i> Payment Processed
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link sideLink " href="/on-process-document">
-              <i class="fas fa-redo-alt"style="color: goldenrod;"></i> On Process Documents
+              <i class="fas fa-hourglass-start"style="color: goldenrod;"></i> On Process Documents
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link sideLink " href="/printed-requests">
-              <i class="fas fa-print" style="color: blue;"></i> Printed Requests
+              <i class="fas fa-print" style="color: blue;"></i> Processed Documents
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link sideLink " href="/completed">
-            <i class="far fa-check-circle" style="color: green;"></i> Completed Requests
+            <i class="fas fa-walking" style="color: goldenrod;"></i> Documents to Claim
             </a>
         </li>
         <li class="nav-item">

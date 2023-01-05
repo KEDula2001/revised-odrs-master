@@ -75,7 +75,20 @@
 							</div>
 						<?php endif; ?>
 					</div>
-
+					<div class="form-group mb-3">
+					<label for="submission_status">Submission Status</label>
+								<select name="submission_status" id="submission_status">
+									
+									<option value="c">Complete</option>
+									<option value="inc">Incomplete</option>
+									
+								</select>
+						<?php if (isset($errors['submission_status'])): ?>
+							<div class="text-danger">
+								<?=esc($errors['submission_status'])?>
+							</div>
+						<?php endif; ?>
+					</div>
 					<div class="row">
 						<div class="col-12">
 						<button type="submit" class="btnRegister float-end btn btn-primary">Submit</button>

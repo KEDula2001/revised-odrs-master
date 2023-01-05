@@ -73,7 +73,7 @@ var adminFormTable = $('#admin-form-table').DataTable({
   "bAutoWidth": false,
   "dom": '<"row"<"col-6"<"select-pending mb-3">><"col-6"f>>t<"row"<"col-6"<"action-pending mt-3">><"col-6 float-end mt-3"p>>',
   fnInitComplete: function(){
-      $('div.select-pending').html('<span class="h2"> Form 137 Requests </span>');
+      $('div.select-pending').html('<span class="h2"> Form 137 </span> <span class="p"><br><i>Here are the list of requestors who requested for their Form 137 Requests. </span>');
     }
 });
 
@@ -90,7 +90,7 @@ var adminPaidTable = $('#admin-paid-table').DataTable({
   "bAutoWidth": false,
   "dom": '<"row"<"col-6"<"select-pending mb-3">><"col-6"f>>t<"row"<"col-6"<"action-pending mt-3">><"col-6 float-end mt-3"p>>',
   fnInitComplete: function(){
-      $('div.select-pending').html('<span class="h2"> Paid Requests </span>');
+      $('div.select-pending').html('<span class="h2"> Paid Requests </span><span class="p"><br><i>Here are the list of requestors who have paid for their document requests. </span>');
     }
 });
 
@@ -107,7 +107,7 @@ var adminPaymentTable = $('#admin-payment-table').DataTable({
   "bAutoWidth": false,
   "dom": '<"row"<"col-6"<"select-pending mb-3">><"col-6"f>>t<"row"<"col-6"<"action-pending mt-3">><"col-6 float-end mt-3"p>>',
   fnInitComplete: function(){
-      $('div.select-pending').html('<span class="h2"> For Payment </span>');
+      $('div.select-pending').html('<span class="h2"> Payment Processing </span> <span class="p"><br><i>Here are the list of requestors with pending payment. </span>');
     }
 });
 
@@ -124,9 +124,8 @@ var adminPendingTable = $('#admin-pending-table').DataTable({
   "bAutoWidth": false,
   "dom": '<"row"<"col-6"<"select-pending mb-3">><"col-6"f>>t<"row"<"col-6"<"action-pending mt-3">><"col-6 float-end mt-3"p>>',
   fnInitComplete: function(){
-      $('div.select-pending').html('<span class="h2"> Pending Request </span>');
-      $('div.action-pending').html('<button onClick="confirmSelect()" class="btn btn-primary">Approve Selected</button> <button onClick="rejectSelect()" class="btn btn-primary">Reject Selected</button>');
-   
+      $('div.select-pending').html('<span class="h2"> Pending Request </span><span class="p"><br><i>Here are the list of requestors to approve before their document is to be processed. </span>');
+      $('div.action-pending').html('<button onClick="confirmSelect()" class="btn btn-primary">Approve Selected</button>');
     }
 });
 
@@ -163,7 +162,7 @@ function confirmSelect()
           swal.close()
           Swal.fire({
             icon: 'success',
-            title: 'Successfuly Approved',
+            title: 'Successfully Approved',
           }).then(function(){
             location.reload()
           })
@@ -182,7 +181,7 @@ function confirmSelect()
     }
   });
 }
-
+/**
 function rejectSelect()
 {
   Swal.fire({
@@ -219,7 +218,7 @@ function rejectSelect()
           swal.close()
           Swal.fire({
             icon: 'success',
-            title: 'Successfuly Denied',
+            title: 'Successfully Denied',
           }).then(function(){
             location.reload()
           })
@@ -238,7 +237,7 @@ function rejectSelect()
     }
   });
 }
-
+**/
 
 function reUploadRequest(id, student_number)
 {
@@ -264,7 +263,7 @@ function reUploadRequest(id, student_number)
           swal.close()
           Swal.fire({
             icon: 'success',
-            title: 'Successfuly notify the user!',
+            title: 'Successfully notified the user!',
           }).then(function(){
             location.reload()
           })
@@ -288,7 +287,7 @@ function acceptForm(id, student_number)
 {
   Swal.fire({
     title: 'Are you sure?',
-    text: "The request will now mark to be process!",
+    text: "The request will now be marked as to be processed!",
     icon: 'warning',
     showCancelButton: true,
     confirmButtonText: 'Yes'
@@ -308,7 +307,7 @@ function acceptForm(id, student_number)
           swal.close()
           Swal.fire({
             icon: 'success',
-            title: 'Successfuly Accepted',
+            title: 'Successfully Accepted',
           }).then(function(){
             location.reload()
           })
@@ -332,7 +331,7 @@ function receiveForm(id, student_number)
 {
   Swal.fire({
     title: 'Are you sure?',
-    text: "The request will now mark to be completed!",
+    text: "The request will now be marked to be completed!",
     icon: 'warning',
     showCancelButton: true,
     confirmButtonText: 'Yes'
@@ -352,7 +351,7 @@ function receiveForm(id, student_number)
           swal.close()
           Swal.fire({
             icon: 'success',
-            title: 'Successfuly Accepted',
+            title: 'Successfully Accepted',
           }).then(function(){
             location.reload()
           })
@@ -376,7 +375,7 @@ function acceptRequest(id, student_number)
 {
   Swal.fire({
     title: 'Are you sure?',
-    text: "The request will now mark to be process!",
+    text: "The request will now be marked to be processed!",
     icon: 'warning',
     showCancelButton: true,
     confirmButtonText: 'Yes'
@@ -396,7 +395,7 @@ function acceptRequest(id, student_number)
           swal.close()
           Swal.fire({
             icon: 'success',
-            title: 'Successfuly Accepted',
+            title: 'Successfully Accepted',
           }).then(function(){
             location.reload()
           })
@@ -434,7 +433,7 @@ function denyRequest(id, student_number)
     if (result.isConfirmed) {
       $.ajax({
         type: 'POST',
-        url: 'document-requests/reject-request',
+        url: 'document-requests/deny-request',
         data: {
           'id' : id,
           'remark' : result.value,
@@ -466,7 +465,7 @@ var approvalTable = $('#approval-table').DataTable({
   "bAutoWidth": false,
   "dom": '<"row"<"col-6"<"select mb-3">><"col-6"f>>t<"row"<"col-6"<"action mt-3">><"col-6 mt-3 float-end"p>>',
   fnInitComplete: function(){
-      $('div.select').html('<span class="h2"> For Approval </span>');
+      $('div.select').html('<span class="h2"> For Approval </span> <span class="p"><br><i>Here are the list of requestors to approve before their document is to be processed. </span>');
       $('div.action').html('<button onclick="approveSelect()" id="approve-selected" class="btn btn-primary">Approve Selected</button>');
     }
 });
@@ -484,7 +483,7 @@ var onHoldTable = $('#on-hold-table').DataTable({
   "bAutoWidth": false,
   "dom": '<"row"<"col-6"<"select-hold mb-3">><"col-6"f>>t<"row"<"col-6"<"action-hold mt-3">><"col-6 mt-3 float-end"p>>',
   fnInitComplete: function(){
-      $('div.select-hold').html('<span class="h2"> On Hold Requests </span>');
+      $('div.select-hold').html('<span class="h2"> On Hold Requests </span> <span class="p"><br><i>Here are the list of requestors rejected due to disqualification. </span>');
       $('div.action-hold').html('<button onclick="approveSelect()" id="approve-selected" class="btn btn-primary">Approve Selected</button>');
     }
 });
@@ -525,7 +524,7 @@ function approveSelect()
           swal.close()
           Swal.fire({
             icon: 'success',
-            title: 'Successfuly Approved',
+            title: 'Successfully Approved',
           })
           location.reload()
         },
@@ -577,7 +576,7 @@ function holdRequest(id, student_number, detail_id)
           Swal.close();
           Swal.fire({
             'icon': 'success',
-            'title' : 'Successfully Hold the request',
+            'title' : 'Successfully put request On Hold',
           });
         },
         error: function (request, error) {
@@ -620,8 +619,8 @@ var onProcessTable = $('#process-table').DataTable({
   "bAutoWidth": false,
   "dom": '<"row"<"col-6"<"select mb-3">><"col-6"f>>t<"row"<"col-6"<"action mt-3">><"col-6 float-end mt-3"p>>',
   fnInitComplete: function(){
-      $('div.select').html('<span class="h2"> On Process Documents </span>');
-      // $('div.action').html('<button onClick="printRequest()" id="process-selected" class="btn btn-primary">Process Complete</button>');
+      $('div.select').html('<span class="h2"> On Process Documents </span><span class="p"><br><i>Here are the list of requestors whose documents are being processed. </span>');
+      //$('div.action').html('<button onClick="printRequest()" id="process-selected" class="btn btn-primary">Process Complete</button>');
     }
 });
 
@@ -633,7 +632,7 @@ var processedTable = $('#processed-table').DataTable({
   "bAutoWidth": false,
   "dom": '<"row"<"col-6"<"select mb-3">><"col-6"f>>t<"row"<"col-6"<"action mt-3">><"col-6 float-end mt-3"p>>',
   fnInitComplete: function(){
-      $('div.select').html('<span class="h2"> Ready to Claim Documents </span>');
+      $('div.select').html('<span class="h2"> Processed Documents </span> <span class="p"><br><i>Here are the list of requestors whose documents have been successfully processed and completed. </span>');
       // $('div.action').html('<button onClick="printRequest()" id="process-selected" class="btn btn-primary">Process Complete</button>');
     }
 });
@@ -666,7 +665,7 @@ async function printRequest(id, per_page, template, email)
             Swal.close();
             Swal.fire({
               'icon': 'success',
-              'title' : 'Successfully mark as printed',
+              'title' : 'Successfully marked as printed',
             }).then(function(){
               location.reload()
             })
@@ -687,7 +686,7 @@ async function printRequest(id, per_page, template, email)
     if (template != null && per_page == 0) {
       Swal.fire({
         icon: 'warning',
-        title: 'This request will mark as printed.',
+        title: 'This request will now be marked as printed.',
         showCancelButton: true,
         html: `<label for='printed_at' class='form-label'>Date Printed</label><input type='datetime-local' id='printed_at' class='form-control'><br> You will not be able to undo the action <br><small>(This document has a template)</small> <br><a href='`+server+`/document-requests/`+template+`/`+id+`' target="_blank">CLICK HERE TO DOWNLOAD</a>`,
         confirmButtonText: `Confirm`,
@@ -711,7 +710,7 @@ async function printRequest(id, per_page, template, email)
               Swal.close();
               Swal.fire({
                 'icon': 'success',
-                'title' : 'Successfully mark as printed',
+                'title' : 'Successfully marked as printed',
               }).then(function(){
                 location.reload()
               })
@@ -730,7 +729,7 @@ async function printRequest(id, per_page, template, email)
       })
     } else {
       Swal.fire({
-        title: 'Please Upload a File',
+        title: 'Please upload a file',
         icon: 'warning',
         html: `<form method='post' id='form' enctype='multipart/form-data'><input type='hidden' name='email' value=`+email+`><input type='hidden' name='id' value=`+id+`><label for='printed_at' class='form-label'>Date Printed</label><input type='datetime-local' id='printed_at' name='printed_at' class='form-control'><input type='file' name='file' id='file' class='form-control' accept='application/pdf' required></form> <Br>`,
         showCancelButton: true,
@@ -973,7 +972,7 @@ $(document).ready(function(){
       type: 'get',
       data: {id: $(this).attr("id")},
       beforeSend: function(){
-        element.html('Fetching Data...');
+        element.html('Fetching data...');
       },
       success: function(html){
         element.html(html);
@@ -992,7 +991,7 @@ $(document).ready(function(){
       type: 'get',
       data: {id: $(this).attr("id")},
       beforeSend: function(){
-        element.html('Fetching Data...');
+        element.html('Fetching data...');
       },
       success: function(html){
         element.html(html);

@@ -32,12 +32,12 @@ class StudentsModel extends BaseModel
         'email' => $data['email'],
         'role_id' => 4
       ];
-
+      // insert to user table
       $user->insert($userData);
       $id = $user->getInsertID();
 
       $data['user_id'] = $id;
-
+      // insert to student table
       $this->insert($data);
 
       $student = new Students();
@@ -118,7 +118,7 @@ class StudentsModel extends BaseModel
   }
 
   public function getNull($id){
-    $this->select('contact, gender,course_id, status');
+    $this->select('contact, gender,_id, status');
     $this->where('id', $id);
     return $this->findAll();
   }

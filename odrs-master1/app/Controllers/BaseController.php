@@ -25,7 +25,13 @@ use Modules\DocumentManagement\Models as DocumentManagement;
 // Document Requests Models
 use Modules\DocumentRequest\Models as DocumentRequest;
 
+use Modules\AdmissionManagement\Models as AdmissionManagement;
+
+
+
+
 use App\Models\AdminsModel;
+use App\Models\AdmissionofficeModel;
 use App\Models\CoursesModel;
 use App\Models\DocumentRequirementsModel;
 use App\Models\DocumentsModel;
@@ -34,7 +40,9 @@ use App\Models\RequestApprovalsModel;
 use App\Models\RequestDetailsModel;
 use App\Models\PermissionTypesModel;
 use App\Models\RequestsModel;
-use App\Models\StudentsModel;
+
+
+
 /**
  * Class BaseController
  *
@@ -80,6 +88,7 @@ class BaseController extends Controller
 		$this->rolePermissionModel = new UserManagement\RolePermissionsModel();
 		$this->userModel = new UserManagement\UsersModel();
 		$this->adminModel = new UserManagement\AdminsModel();
+		$this->admissionofficeModel = new UserManagement\AdmissionofficeModel();
 
 		// Module Management Models - ModuleManagement\Class();
 
@@ -103,6 +112,7 @@ class BaseController extends Controller
 		$this->documentModel = new DocumentManagement\DocumentsModel();
 		$this->documentNoteModel = new DocumentManagement\DocumentNotesModel();
 		$this->documentRequirementModel = new DocumentManagement\DocumentRequirementsModel();
+		
 
 		// Document Requests models - DocumentRequests\Class();
 
@@ -111,6 +121,10 @@ class BaseController extends Controller
 		$this->requestDetailModel = new DocumentRequest\RequestDetailsModel();
 		$this->requestModel = new DocumentRequest\RequestsModel();
 		$this->formRequestModel = new DocumentRequest\FormRequestsModel();
+
+		//Admission Management Model  - AdmissionMangement\Class(); 
+		
+		$this->submissionstatusModel = new AdmissionManagement\SubmissionStatusModel();
 
 		$this->session = \Config\Services::session();
 		$this->validation =  \Config\Services::validation();

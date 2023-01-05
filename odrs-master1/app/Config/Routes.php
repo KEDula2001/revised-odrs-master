@@ -50,24 +50,25 @@ $routes->group('student', ['namespace' => 'App\Controllers\Student'], function($
 	$routes->match(['get', 'post'], 'request', 'Request::send');
 	$routes->get('request/delete/(:num)', 'Request::delete/$1');
 	$routes->get('stub/(:num)', 'request::stub/$1');
+
 });
 
 $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function($routes)
 {
 		//Online Request
-    $routes->get('/', 'Request::index');
-    $routes->get('pending-requests', 'Request::index');
-    $routes->get('office-approval', 'Request::approval');
-    $routes->post('approve-request', 'Request::approve');
-    $routes->post('request-confirm', 'Request::confirm');
-    $routes->get('on-process-requests', 'Request::process');
-    $routes->post('process', 'Request::documentProcessed');
-    $routes->get('processed-requests', 'Request::processed');
-    $routes->post('scan', 'Request::scan');
-    $routes->get('claimed-requests', 'Request::claimed');
+	    $routes->get('/', 'Request::index');
+	    $routes->get('pending-requests', 'Request::index');
+	    $routes->get('office-approval', 'Request::approval');
+	    $routes->post('approve-request', 'Request::approve');
+	    $routes->post('request-confirm', 'Request::confirm');
+	    $routes->get('on-process-requests', 'Request::process');
+	    $routes->post('process', 'Request::documentProcessed');
+	    $routes->get('processed-requests', 'Request::processed');
+	    $routes->post('scan', 'Request::scan');
+	    $routes->get('claimed-requests', 'Request::claimed');
 
 		//Student Information
-    $routes->get('undergraduate', 'Student::index');
+    	$routes->get('undergraduate', 'Student::index');
 		$routes->get('alumni', 'Student::alumni');
 
 		//Settings
@@ -96,12 +97,21 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function($rout
 		$routes->delete('documents/edit', 'Documents::edit');
 
 		$routes->get('courses', 'Course::index');
-		$routes->get('offices', 'Office::index');
+		$routes->get('offices', 'Office::index');	
 
-		//put by Kyle DULA XD
 		$routes->get('generalreport', 'Generalreport::index');
-});
 
+});
+	$routes->get('admission', 'AdmissionController::index');
+	$routes->post('admission/insert-student', 'AdmissionController::insertstudent');
+	$routes->get('admission/add-student-form', 'AdmissionController::showStudentForm');
+	$routes->get('admission/complete', 'AdmissionController::showStudentCompleteAdmission');
+	$routes->post('admission/insert-admission/(:num)', 'AdmissionController::insertStudentAdmissionForwarded/$1');
+	$routes->get('admission/notify/(:num)', 'AdmissionController::showNotifier/$1');
+	$routes->post('admission/sendmail-lacking-documents/(:num)', 'AdmissionController::sendLackingDocumentstoMail/$1');
+
+	$routes->get('studentadmission/view-admission-history/(:num)', 'StudentadmissionhistoryController::index/$1');
+	$routes->get('admission/incomplete', 'AdmissionController::showstudentIncompleteAdmission');
 /*
  * --------------------------------------------------------------------
  * Additional Routing

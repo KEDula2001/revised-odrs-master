@@ -4,7 +4,7 @@
 <?php foreach ($requests as $request): ?>
   <table cellpadding="5">
     <tr>
-      <td><b>Name: </b> <?=ucwords(esc($request['firstname']) . ' ' . esc($request['middlename']) . '. ' . esc($request['lastname']) . ' ' . esc($request['suffix']))?></td>
+      <td><b>Name: </b> <?=ucwords(esc($request['firstname']) . ' ' . esc($request['middlename']) . ' ' . esc($request['lastname']) . ' ' . esc($request['suffix']))?></td>
       <td><b>Student Number: </b> <?=esc($request['student_number'])?></td>
     </tr>
     <tr>
@@ -48,9 +48,9 @@
           </ul>
         </td>
         <td>
-          P <?php if ($request_detail['per_page_payment']): ?>
-            <?php $document_price += $request_detail['free'] ? 0 : $request_detail['price'] * $request_detail['page']?>
-            <?=$request_detail['free'] ? '0 (Free)' : esc($request_detail['price'] * $request_detail['page'])?>
+          P <?php if ($request_detail['quantity']): ?>
+            <?php $document_price += $request_detail['free'] ? 0 : $request_detail['price'] * $request_detail['quantity']?>
+            <?=$request_detail['free'] ? '0 (Free)' : esc($request_detail['price'] * $request_detail['quantity'])?>
             <?php else: ?>
               <?php $document_price += $request_detail['free'] ? 0 : $request_detail['price']?>
               <?=$request_detail['free'] ? '0 (Free)' : esc($request_detail['price'])?>

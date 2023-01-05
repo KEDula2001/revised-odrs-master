@@ -10,7 +10,7 @@ class Request extends BaseController
 
 	public function index()
 	{
-		$data['request_approvals'] = $this->requestApproval->getDetails(['request_details.status' => 'a','request_approvals.status' => 'p',  'requests.status' => 'c']);
+	$data['request_approvals'] = $this->requestApproval->getDetails(['request_details.status' => 'a','request_approvals.status' => 'p',  'requests.status' => 'c']);
     $data['request_details'] = $this->requestDetail->getDetails(['request_details.status' => 'p', 'requests.status' => 'c']);
     $data['request_details_release'] = $this->requestDetail->getDetails(['request_details.status' => 'r',  'requests.status' => 'c']);
     $data['requests'] = $this->requestModel->getDetails(['requests.status' => 'p']);
@@ -110,10 +110,10 @@ class Request extends BaseController
         }
         $this->session->setFlashdata('success_message', $this->requestDetail->getDetails(['request_id' => $id]));
       } else {
-        $this->session->setFlashdata('error_message', 'There is no ready to claim document in this request');
+        $this->session->setFlashdata('error_message', 'There is document to claim in this request');
       }
     } else {
-      $this->session->setFlashdata('error_message', 'Invalid Input');
+      $this->session->setFlashdata('error_message', 'Invalid input');
     }
     return redirect()->to(base_url().'/admin/processed-requests');
   }

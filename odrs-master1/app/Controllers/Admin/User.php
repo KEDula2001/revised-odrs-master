@@ -11,20 +11,19 @@ class User extends BaseController
 	}
 
 	public function index()
-	{
-
+	{	
 		if($_SESSION['role_id'] != 2 || !isset($_SESSION['role_id']))
 			return view('errors/html/error_404');
 
 		// $data['inactive_users'] = $this->student->get('i', 1);
 		// $data['active_users'] = $this->student->get('a', null);
 
-		if ($this->isAjax()) {
-			return view('admin/user/index');
-		}
-		echo view('admin/template/header');
-		echo view('admin/user/index');
-		return view('admin/template/footer');
+			if ($this->isAjax()) {
+				return view('admin/user/index');
+			}
+			echo view('admin/template/header');
+			echo view('admin/user/index');
+			return view('admin/template/footer');
 	}
 
 	public function delete(){
@@ -89,11 +88,11 @@ class User extends BaseController
 				$data['role_id'] = 3;
 				$data['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
 				$data['user_id'] = $this->user->input($data);
-				 if ($this->admin->input($data)) {
+				if ($this->admin->input($data)) {
 					 $this->session->setFlashdata('success', 'You have successfuly added a account');
 					 return redirect()->to(base_url('admin/users'));
-				 }
-				 else {
+				}
+				else {
 					$this->session->setFlashdata('error', 'Something went wrong try again');
 					return redirect()->to(base_url('admin/users'));
 				}

@@ -59,6 +59,7 @@
                               <th>Name</th>
                               <th>Courses</th>
                               <th>Academic Status</th>
+                              <th>Submission Status</th> 
                             </tr>
                           </thead>
                           <tbody>
@@ -68,8 +69,9 @@
                                   <td>#</td>
                                   <td><?=ucwords(esc($student['student_number']))?></td>
                                   <td><?=ucwords(esc($student['firstname'] . ' ' . esc($student['lastname'])))?></td>
-                                  <td><?=ucwords(esc($student['course']))?></td>
+                                  <td><?=ucwords(esc($student['abbreviation']))?></td>
                                   <td><?=ucwords(esc($student['status']))?></td>
+                                  <td></td>
                                 </tr>
                               <?php endforeach; ?>
                             <?php endif; ?>

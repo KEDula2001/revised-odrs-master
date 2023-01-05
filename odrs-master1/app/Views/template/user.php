@@ -17,9 +17,6 @@
             </li>
           <?php endif; ?>
         <?php endforeach; ?>
-        <li class="nav-item">
-          <a class="nav-link sideLink active" href="<?=esc(base_url('form-137'))?>">Form 137 Form</a>
-        </li>
       </ul>
       <ul class="navbar-nav logout">
           <li class="nav-item dropdown d-flex">

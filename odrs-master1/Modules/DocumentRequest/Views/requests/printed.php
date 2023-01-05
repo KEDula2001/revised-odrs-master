@@ -2,7 +2,7 @@
       <div class="col-6 offset-3">
         <div class="form-floating">
           <input type="text" class="form-control mb-3"onEnter="scan()" name="slug" id="slug" class="floatingInput" placeholder="Student Number" required>
-          <label for="floatingInput">Scan Barcode Here</label>
+          <label for="floatingInput">Enter Receipt Code Here</label>
         </div>
       </div>
       <div class="row">

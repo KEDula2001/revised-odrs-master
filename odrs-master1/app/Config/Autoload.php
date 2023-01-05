@@ -47,7 +47,8 @@ class Autoload extends AutoloadConfig
 		'Modules\StudentManagement' 		=> ROOTPATH . 'Modules/StudentManagement',
 		'Modules\SystemSettings' 			=> ROOTPATH . 'Modules/SystemSettings',
 		'Modules\DocumentManagement'		=> ROOTPATH . 'Modules/DocumentManagement',
-		'Modules\DocumentRequest'		   => ROOTPATH . 'Modules/DocumentRequest',
+		'Modules\DocumentRequest'		   	=> ROOTPATH . 'Modules/DocumentRequest',
+		'Modules\AdmissionManagement'		=> ROOTPATH . 'Modules/AdmissionManagement',
 	];
 
 	/**

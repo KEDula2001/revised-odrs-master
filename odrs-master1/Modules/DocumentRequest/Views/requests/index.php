@@ -13,6 +13,9 @@
                 <tbody>
                   <tr>
                     <td>
+                      <a href="<?php echo base_url('studentadmission/view-admission-history/'.$_SESSION['user_id']); ?>" class="btn <?=empty($requests) ? '': 'disabled'?>" disabled> Admission History</a>
+                    </td>
+                    <td>
                       <a href="requests/new" class="btn <?=empty($requests) ? '': 'disabled'?>" disabled><i class="fas fa-plus"></i> Request document here</a>
                     </td>
                   </tr>
@@ -27,7 +30,6 @@
               <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
                   <button class="nav-link active" id="nav-requests-tab" data-bs-toggle="tab" data-bs-target="#nav-requests" type="button" role="tab" aria-controls="nav-requests" aria-selected="true">My Requests</button>
-                  <button class="nav-link" id="nav-approval-tab" data-bs-toggle="tab" data-bs-target="#nav-approval" type="button" role="tab" aria-controls="nav-approval" aria-selected="false">For Office Approval</button>
                   <button class="nav-link" id="nav-process-tab" data-bs-toggle="tab" data-bs-target="#nav-process" type="button" role="tab" aria-controls="nav-process" aria-selected="false">On Process Document/s</button>
                   <button class="nav-link" id="nav-released-tab" data-bs-toggle="tab" data-bs-target="#nav-released" type="button" role="tab" aria-controls="nav-released" aria-selected="false">Document/s to be Released</button>
                 </div>
@@ -43,7 +45,7 @@
                               <th width="10%">Request Code</th>
                               <th width="20%">Documents</th>
                               <th width="10%">Date Submitted</th>
-                              <th width="5%">Receipt Info</th>
+                          <th width="5%">Receipt Info</th>
                               <th width="20%">Status</th>
                               <th width="35%">Action</th>
                           </thead>
@@ -76,18 +78,18 @@
                                     <?php if ($request['receipt_number'] == null): ?>
                                       N/A
                                     <?php else: ?>
-                                      <a href="#" onClick="viewReceipt('<?=esc($request['receipt_img'])?>', '<?=esc($request['receipt_number'])?>')">View</a>
+                                      <a href="#" onClick="viewReceipt('< ?=esc($request['receipt_img'])?>', '<?=esc($request['receipt_number'])?>')">View</a> 
                                     <?php endif; ?>
-                                  </td>
+                                  </td>    
                                   <td>
                                     <?php if ($request['status'] == 'p'): ?>
                                         Waiting for admin approval
                                     <?php elseif($request['status'] == 'y'): ?>
                                         Waiting for payment (Upload receipt details)
                                     <?php elseif($request['status'] == 'i'): ?>
-                                        Admin is checking the receipt details you uploaded
+                                        Admin is checking your processed payment.
                                     <?php else: ?>
-                                        Your requests is now on process
+                                        Your request/s is now on process
                                     <?php endif; ?>
                                   </td>
                                   <td>
@@ -97,8 +99,8 @@
                                       <a href="#" onclick="uploadReceipt(<?=esc($request['id'])?>)" class="btn btn-secondary btn-sm">Upload Receipt</a>
                                       <a target="_blank" href="<?=base_url()?>/requests/stub/<?=esc($request['id'])?>" class="btn btn-success btn-sm">Download Stub</a>
                                     <?php elseif($request['status'] == 'i'): ?>
-                                      <a href="#" onclick="uploadReceipt(<?=esc($request['id'])?>)" class="btn btn-secondary btn-sm">Reupload Receipt</a>
-                                      <a target="_blank" href="<?=base_url()?>/requests/stub/<?=esc($request['id'])?>" class="btn btn-success btn-sm">Download Stub</a>
+                                      <a href="#" onclick="uploadReceipt(<?=esc($request['id'])?>)" class="btn btn-secondary btn-sm">Reupload Receipt</a>   
+                                      <a target="_blank" href="<?=base_url()?>/requests/stub/<?=esc($request['id'])?>" class="btn btn-success btn-sm">Download Stub</a>     
                                     <?php else: ?>
                                       <a target="_blank" href="<?=base_url()?>/requests/stub/<?=esc($request['id'])?>" class="btn btn-success btn-sm">Download Stub</a>
                                     <?php endif; ?>
@@ -114,7 +116,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="tab-pane fade" id="nav-approval" role="tabpanel" aria-labelledby="nav-profile-tab">
+             <div class="tab-pane fade" id="nav-approval" role="tabpanel" aria-labelledby="nav-profile-tab">
                   <div class="row">
                     <div class="col-md-12">
                       <h4>Office Approval</h4>
@@ -148,7 +150,7 @@
                       </div>
                     </div>
                   </div>
-                </div>
+                </div>     
                 <div class="tab-pane fade" id="nav-process" role="tabpanel" aria-labelledby="nav-contact-tab">
                   <div class="row">
                     <div class="col-md-12">
@@ -201,7 +203,7 @@
                                 <tr>
                                   <td><?= esc($request_detail['document']) ?></td>
                                   <td><?= date('F d, Y - h:i A', strtotime(esc($request_detail['updated_at'])))?></td>
-                                  <td>₱ <?= (esc($request_detail['price']) * esc($request_detail['quantity'])) * esc($request_detail['page'])?></td>
+                                  <td>₱ <?= (esc($request_detail['price']) * esc($request_detail['quantity']))?></td>
                                 </tr>
                               <?php endforeach; ?>
                             <?php endif; ?>
